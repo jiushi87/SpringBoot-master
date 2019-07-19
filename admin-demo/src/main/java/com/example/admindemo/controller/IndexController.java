@@ -21,7 +21,7 @@ public class IndexController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public String home(Model model) {
+	public String index(Model model) {
 		JSONObject jsonObject = new JSONObject();
 		Users users = super.getUsers();
 		logger.info(jsonObject.toJSONString(users));
@@ -29,5 +29,9 @@ public class IndexController extends BaseController{
 			model.addAttribute("users",users);
 		}
 		return "index";
+	}
+	@RequestMapping("/home")
+	public String home(){
+		return "home";
 	}
 }
