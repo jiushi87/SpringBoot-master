@@ -1,15 +1,13 @@
 package com.example.admindemo.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.admindemo.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.alibaba.fastjson.JSONObject;
-import com.example.admindemo.model.Users;
-
 
 
 @Controller
@@ -20,7 +18,7 @@ public class IndexController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(value="/index",method= RequestMethod.GET)
 	public String index(Model model) {
 		JSONObject jsonObject = new JSONObject();
 		Users users = super.getUsers();
@@ -30,8 +28,19 @@ public class IndexController extends BaseController{
 		}
 		return "index";
 	}
-	@RequestMapping("/home")
+	@RequestMapping("/")
 	public String home(){
 		return "home";
 	}
+	@RequestMapping("/setting")
+	public String tests(Model model){
+		System.out.println("请求：======>>setting");
+		return "/collect/setting";
+	}
+	@RequestMapping("/notice")
+	public String notice(Model model){
+		System.out.println("请求：======>>notice");
+		return "/collect/notice";
+	}
+
 }

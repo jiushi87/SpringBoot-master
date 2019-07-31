@@ -28,11 +28,11 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/resources/static/**").addResourceLocations("classpath:/static/").addResourceLocations("classpath:/templates/");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LocaleChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/**.js","/**.css","/**.css","/**.svg");
+        registry.addInterceptor(new LocaleChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/**.js","/**.css","/**.css","/**.svg","/**.html");
     }
 }

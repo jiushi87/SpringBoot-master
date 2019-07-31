@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <title>Layout</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <head th:fragment="htmlhead">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>管理员</title>
+        <link rel="stylesheet" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+        <link rel="stylesheet" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
     </head>
     <body>
-
+    <div class="container-scroller">
         <!-- header -->
         <div th:replace="fragments/header :: header"></div>
+        <div class="container-fluid page-body-wrapper">
+            <div th:replace="fragments/left :: left">left</div>
+            <!-- content -->
+            <div layout:fragment="content" id="content"></div>
 
-        <!-- content -->
-        <div layout:fragment="content"></div>
+            <!-- footer -->
 
-        <!-- footer -->
-        <div th:replace="fragments/footer :: footer"></div>
-
+        </div>
+    </div>
+        <script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+        <script th:src="@{/vendors/chart.js/Chart.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/dashboard.js}"></script>
+        <script th:src="@{/js/data-table.js}"></script>
+        <script th:src="@{/js/comm.js}" ></script>
+        <script th:src="@{/js/jquery.dataTables.js}"></script>
+        <script th:src="@{/js/dataTables.bootstrap4.js}"></script>
     </body>
 </html>
