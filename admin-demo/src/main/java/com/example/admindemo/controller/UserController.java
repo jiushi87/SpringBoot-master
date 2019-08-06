@@ -21,15 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	UsersRepository usersRepository;
+	@Autowired UsersRepository usersRepository;
 
 	/**
 	 * 登录
-	 * 
+	 *
 	 * @param users
 	 * @param response
 	 * @return
@@ -42,30 +41,39 @@ public class UserController extends BaseController{
 		String usersjsonString = jsonObject.toJSONString(users);
 		try {
 			logger.info(sdf.format(date) + ":开始========>>" + usersjsonString);
-			if (users.getUserName() == null || users.getPassWord() == null || "".equals(users.getUserName())
-					|| "".equals(users.getPassWord())) {
+			// 验证用户名密码不为空
+			if (users.getUserName() == null
+					|| users.getPassword() == null
+					|| "".equals(users.getUserName())
+					|| "".equals(users.getPassword())) {
 				logger.info(sdf.format(date) + ":结束========>>" + ExceptionMsg.FAILUREUSERS.getMsg());
 				return new ResponseData(ExceptionMsg.FAILUREUSERS);
 			}
+			// 判断用户是否存在
 			Users loginUsers = usersRepository.findUsersByUserName(users.getUserName());
 			logger.info(jsonObject.toJSONString(loginUsers));
 			if (loginUsers == null) {
 				logger.info(sdf.format(date) + ":结束========>>" + ExceptionMsg.LoginNameNotExists.getMsg());
 				return new ResponseData(ExceptionMsg.LoginNameNotExists);
 			}
-			String encrypt = MD5Util.encrypt(users.getPassWord());
+			// 判断用户密码是否正确
+			String encrypt = MD5Util.encrypt(users.getPassword());
 			logger.info(encrypt);
-			if (!encrypt.equals(loginUsers.getPassWord())) {
-				logger.info(sdf.format(date) + ":结束========>>" + ExceptionMsg.LoginNameOrPassWordError.getMsg());
+			if (!encrypt.equals(loginUsers.getPassword())) {
+				logger.info(
+						sdf.format(date) + ":结束========>>" + ExceptionMsg.LoginNameOrPassWordError.getMsg());
 				return new ResponseData(ExceptionMsg.LoginNameOrPassWordError);
 			}
-			Cookie cookie = new Cookie(Const.LOGIN_SESSION_KEY, cookieSign(loginUsers.getId().toString()));
+			// 写入cookie
+			Cookie cookie =
+					new Cookie(Const.LOGIN_SESSION_KEY, cookieSign(loginUsers.getId().toString()));
 			cookie.setMaxAge(Const.COOKIE_TIMEOUT);
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			getSession().setAttribute(Const.LOGIN_SESSION_KEY, loginUsers);
+			// 成功跳转首页
 			String preurl = "/index";
-			logger.info(sdf.format(date) + ":成功");
+			logger.info(sdf.format(date) + ":结束========>>:成功");
 			return new ResponseData(ExceptionMsg.SUCCESS, preurl);
 		} catch (Exception e) {
 			logger.info(sdf.format(date) + ":结束========>>" + ExceptionMsg.FAILED.getMsg());
@@ -73,6 +81,4 @@ public class UserController extends BaseController{
 			return new ResponseData(ExceptionMsg.FAILED);
 		}
 	}
-
-
 }

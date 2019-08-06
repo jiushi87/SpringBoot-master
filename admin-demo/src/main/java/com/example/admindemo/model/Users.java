@@ -1,83 +1,140 @@
 package com.example.admindemo.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.io.Serializable;
+import java.util.Date;
 
-
-/**
- * The persistent class for the users database table.
- * 
- */
+/** The persistent class for the users database table. */
 @Entity
-@Table(name="users")
-@NamedQuery(name="Users.findAll", query="SELECT u FROM Users u")
+@Table(name = "users")
+@NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
 public class Users implements Serializable {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(unique = true, nullable = false)
+  private Integer id;
 
+  @Column(name = "user_name", length = 32)
+  private String userName;
 
-	@Column(name="pass_word", length=255)
-	private String passWord;
+  @Column(name = "password", length = 50)
+  private String password;
 
-	@Column(length=255)
-	private String permission;
+  @Column(name = "identity", length = 32)
+  private String identity;
 
-	@Column(name="permission_name", length=255)
-	private String permissionName;
+  @Column(name = "real_name", length = 32)
+  private String realName;
 
-	@Column(name="user_name", length=255)
-	private String userName;
+  @Column(name = "date_birth")
+  private Date dateBirth;
 
-	public Users() {
-	}
+  @Column(name = "email", length = 100)
+  private String email;
 
-	public Long getId() {
-		return this.id;
-	}
+  @Column(name = "iphone", length = 11)
+  private String iphone;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @Column(name = "user_id", length = 11)
+  private Integer userId;
 
+  @Column(name = "signature", length = 255)
+  private String signature;
 
-	public String getPassWord() {
-		return this.passWord;
-	}
+  @Column(name = "profile_picture", length = 255)
+  private String profilePicture;
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
-	}
+  public static long getSerialVersionUID() {
+    return serialVersionUID;
+  }
 
-	public String getPermission() {
-		return this.permission;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public String getPermissionName() {
-		return this.permissionName;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setPermissionName(String permissionName) {
-		this.permissionName = permissionName;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
+  public String getUserName() {
+    return userName;
+  }
 
-	public String getUserName() {
-		return this.userName;
-	}
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+  public String getIdentity() {
+    return identity;
+  }
 
-	
+  public void setIdentity(String identity) {
+    this.identity = identity;
+  }
 
+  public String getRealName() {
+    return realName;
+  }
+
+  public void setRealName(String realName) {
+    this.realName = realName;
+  }
+
+  public Date getDateBirth() {
+    return dateBirth;
+  }
+
+  public void setDateBirth(Date dateBirth) {
+    this.dateBirth = dateBirth;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getIphone() {
+    return iphone;
+  }
+
+  public void setIphone(String iphone) {
+    this.iphone = iphone;
+  }
+
+  public Integer getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
+
+  public String getSignature() {
+    return signature;
+  }
+
+  public void setSignature(String signature) {
+    this.signature = signature;
+  }
+
+  public String getprofilePicture() {
+    return profilePicture;
+  }
+
+  public void setprofilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
+  }
 }

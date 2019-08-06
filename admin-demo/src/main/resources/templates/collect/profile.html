@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:include="~{collect/setting :: sites}"></head>
+    <body>
+        <section layout:fragment="information">
+            <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table table-striped py-1">
+                                <img src="../../images/faces/face1.jpg" alt="image" class="img-rounded"/>
+                                <div style="margin-left: 110px;margin-top: -35px;">
+                                    <button type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
+                                        <i class="mdi mdi-camera-party-mode"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
+                                        <i class="mdi mdi-grease-pencil"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <p class="font-weight-bold"><i class="mdi mdi-clipboard-outline"></i>个性签名：</p>
+                                    <p>[[${settingUsers.signature}]]</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="font-weight-bold"><i class="mdi mdi-account-circle"></i>用户名</p>
+                                    <p>[[${settingUsers.userName}]]</p>
+                                    <p class="font-weight-bold"><i class="mdi mdi-calendar-text"></i>出生年月日</p>
+                                    <p>[[${settingUsers.dateBirth}]]</p>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="font-weight-bold"><i class="mdi mdi-email"></i>邮箱地址</p>
+                                    <p class="mb-2">[[${settingUsers.email}]]</p>
+                                    <p class="font-weight-bold"><i class="mdi mdi-cellphone-iphone"></i>手机号码</p>
+                                    <p>[[${settingUsers.iphone}]]</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Lead</h4>
+                            <p class="card-description">Use class <code>.lead</code></p>
+                            <p class="lead">
+                                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+
+<div class="row">
+    <div class="col-md-3 col-xl-2">
+        <div class="card-tab">
+            <div class="list-group list-group-flush" role="tablist">
+                <a href="#personal" data-toggle="tab" class="list-group-item list-group-item-action active">账户信息</a>
+                <a href="#privacyAndSecurity" data-toggle="tab" class="list-group-item list-group-item-action">隐私和安全</a>
+                <a href="#home" data-toggle="tab" class="list-group-item list-group-item-action">电子邮件通知</a>
+                <a href="" data-toggle="tab" class="list-group-item list-group-item-action">Web通知</a>
+                <a href="" data-toggle="tab" class="list-group-item list-group-item-action">小组件</a>
+            </div>
+        </div>
+    </div>
+</div>
