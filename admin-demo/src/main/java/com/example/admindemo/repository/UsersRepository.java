@@ -18,8 +18,11 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 
     Users findUsersById(Integer id);
 
+	@Query(value = "select t.id,t.date_birth,t.email,t.identity,t.iphone,t.password,t.profile_picture,t.real_name,t.signature,t.user_id,t.user_name from users t where t.id=?1",nativeQuery = true)
+	Users selectUsers(Integer id);
+
 	@Modifying(clearAutomatically=true)
 	@Transactional
     @Query(value = "update Users set profile_picture =?1 WHERE ID=?2",nativeQuery = true)
-    int updateProfilePicture(String savePath,Integer id);
+    int updateProfilePicture(String profilePicture,Integer id);
 }

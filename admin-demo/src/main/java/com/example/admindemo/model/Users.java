@@ -130,11 +130,11 @@ public class Users implements Serializable {
     this.signature = signature;
   }
 
-  public String getprofilePicture() {
-    return profilePicture;
-  }
+	public String getProfilePicture() {
+		return profilePicture;
+	}
 
-  public void setprofilePicture(String profilePicture) {
-    this.profilePicture = profilePicture;
-  }
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
 }

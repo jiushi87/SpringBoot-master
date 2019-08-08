@@ -138,20 +138,16 @@
 
             function uploadImage(dataURL) {
                 var dataURL2=dataURL.replace(/\+/g,'%2B');
-                debugger;
                 $.ajax({
                     url: '/uploadImage',
                     data: 'dataURL='+dataURL2,
                     async:  false,
                     type : 'POST',
                     dataType : "json",
-                    success: function (result) {
-                        debugger;
-                        if(result.rspCode == '000000'){
-                            console.log("上传成功");
-                            // toastr.success('上传成功', '上传成功');
+                    success: function (response) {
+                        if(response.rspCode == '000000'){
+                           toastr.success("上传成功！")
                         }else{
-
                             toastr.error(response.rspMsg, '失败');
                         }
 

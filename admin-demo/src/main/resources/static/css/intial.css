@@ -45,7 +45,7 @@ section {
     background-size: 100% 100% !important;
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url("../images/faces/face1.jpg");
+    /*background-image: url("../images/faces/face1.jpg");*/
     margin-left: -5px;
 }
 

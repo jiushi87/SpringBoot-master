@@ -76,8 +76,13 @@ public class IndexController extends BaseController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
     logger.info(sdf.format(date) + ":========开始========>>+" + id);
     Users settingUsers = usersRepository.findUsersById(id);
+    Users users = usersRepository.selectUsers(id);
+    logger.info(sdf.format(date) + "users:========结束========" + jsonObject.toJSONString(users));
     model.addAttribute("settingUsers", settingUsers);
-    logger.info(sdf.format(date) + ":========结束========" + jsonObject.toJSONString(settingUsers));
+    logger.info(
+        sdf.format(date)
+            + "settingUsers:========结束========"
+            + jsonObject.toJSONString(settingUsers));
     return "collect/setting";
   }
 
@@ -99,8 +104,9 @@ public class IndexController extends BaseController {
     return "collect/privacyAndSecurity";
   }
 
+  @ResponseBody
   @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
-  public ResponseData uploadHeadPortrait(@RequestBody String dataURL) {
+  public ResponseData uploadHeadPortrait(@RequestParam("dataURL") String dataURL) {
     Date date = new Date();
     JSONObject jsonObject = new JSONObject();
     SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
@@ -121,10 +127,9 @@ public class IndexController extends BaseController {
         byte[] decodedBytes = decoder.decode(image);
         FileUtil.uploadFile(decodedBytes, filePath, fileName);
         Users users = super.getUsers();
+        logger.info(savePath+"========users========" + users.getId());
         usersRepository.updateProfilePicture(savePath, users.getId());
-        Users user = usersRepository.findUsersById(users.getId());
-        super.getSession().setAttribute(Const.LOGIN_SESSION_KEY, user);
-        logger.info("========" + jsonObject.toJSONString(user) + "========");
+        super.getSession().setAttribute(Const.LOGIN_SESSION_KEY, users);
       }
       logger.info("========头像地址========" + savePath);
       logger.info(sdf.format(date) + "：========执行 上传头像 结束========");

@@ -119,7 +119,7 @@
 
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                                <img src="images/faces/face5.jpg" alt="profile"/>
+                                <img src="images/faces/face5.jpg" th:src="${users.profilePicture}" alt="profile"/>
                                 <span class="nav-profile-name">[[${users.userName}]]</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
