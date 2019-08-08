@@ -9,13 +9,13 @@
                     <div class="col-md-3 col-xl-2">
                         <div class="card-tab">
                             <div class="list-group list-group-flush" role="tablist" id="myTab">
-                                <a href="#personal" data-toggle="tab"
+                                <a href="#personal" data-toggle="tab" onclick="sonalfun()"
                                    class="list-group-item list-group-item-action active">账户信息</a>
                                 <a href="#privacyAndSecurity" data-toggle="tab"
                                    class="list-group-item list-group-item-action">隐私和安全</a>
                                 <a href="#home" data-toggle="tab"
                                    class="list-group-item list-group-item-action">电子邮件通知</a>
-                                <a href="" data-toggle="tab" class="list-group-item list-group-item-action">Web通知</a>
+                                <a href=""  data-toggle="tab" class="list-group-item list-group-item-action">Web通知</a>
                                 <a href="" data-toggle="tab" class="list-group-item list-group-item-action">小组件</a>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                                         class="btn btn-inverse-primary btn-rounded btn-icon">
                                                     <i class="mdi mdi-camera-party-mode"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" onclick="personalShow()"
                                                         class="btn btn-inverse-primary btn-rounded btn-icon">
                                                     <i class="mdi mdi-grease-pencil"></i>
                                                 </button>
@@ -74,7 +74,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!--图片裁剪-->
                 <div class="photoclip">
                     <div class="clipbg-shade displaynone"></div>
@@ -99,6 +98,20 @@
                         <div class="close-back">取消</div>
                     </div>
                 </div>
+                <!--修改个人资料-->
+<!--                <div class="personal-info">-->
+<!--                    <div class="personal-shade displaynone"></div>-->
+<!--                    <div class="personal-a displaynone">-->
+<!--                        <div id="personalArea"></div>-->
+<!--                        <div class="loading displaynone">正在载入图片...</div>-->
+<!--                        <div class="clipbg-outer">-->
+<!--                            111111111-->
+<!--                        </div>-->
+
+
+<!--                        <div class="close-back">取消</div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </section>
         <script th:src="@{http://testwww.9mitao.com/layui_live/lay/lib/jquery.min.js}"></script>
@@ -106,7 +119,17 @@
         <script th:src="@{/js/lrz.all.bundle.js}"></script>
         <script th:src="@{/js/iscroll-zoom-min.js}"></script>
         <script th:src="@{/js/PhotoClip.js}"></script>
-        <script>
+        <script th:inline="javascript">
+            function sonalfun(){
+                var url=[[${settingUsers.profilePicture}]];
+                $('#headimg').css('background-image', 'url( ' + url + ')');
+            }
+
+            function personalShow() {
+                $(".personal-a").fadeIn();
+                $('.personal-shade').fadeIn();
+            }
+
             function showWindow() {
                 $(".clipbg").fadeIn();
                 $('.clipbg-shade').fadeIn();
@@ -124,7 +147,7 @@
                     $(".loading").addClass("displaynone");
                 },
                 done: function (dataURL) { //裁剪完成的回调函数。this 指向当前 PhotoClip 的实例对象，会将裁剪出的图像数据DataURL作为参数传入。
-                    console.log(dataURL); //dataURL裁剪后图片地址base64格式提交给后台处理
+                    // console.log(dataURL); //dataURL裁剪后图片地址base64格式提交给后台处理
                     uploadImage(dataURL);
                     $('#headimg').css('background-image', 'url( ' + dataURL + ')');
                     $(".clipbg").fadeOut();

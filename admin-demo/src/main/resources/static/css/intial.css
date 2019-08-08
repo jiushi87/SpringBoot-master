@@ -45,7 +45,7 @@ section {
     background-size: 100% 100% !important;
     background-repeat: no-repeat;
     background-position: center center;
-    /*background-image: url("../images/faces/face1.jpg");*/
+    background-image: url("../images/faces/face1.jpg");
     margin-left: -5px;
 }
 
@@ -193,4 +193,29 @@ section {
 
 .displaynone {
     display: none;
+}
+
+.personal-shade {
+    position: fixed;
+    background: rgba(0, 0, 0, .5);
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 996;
+}
+
+.personal-a {
+    position: fixed;
+    background: rgba(0, 0, 0, .5);
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 996;
+}
+
+.personal-a #personalArea {
+    height: 80%;
+    margin: 10px;
 }
