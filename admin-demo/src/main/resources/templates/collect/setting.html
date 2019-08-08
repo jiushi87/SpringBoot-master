@@ -15,7 +15,7 @@
                                    class="list-group-item list-group-item-action">隐私和安全</a>
                                 <a href="#home" data-toggle="tab"
                                    class="list-group-item list-group-item-action">电子邮件通知</a>
-                                <a href=""  data-toggle="tab" class="list-group-item list-group-item-action">Web通知</a>
+                                <a href="" data-toggle="tab" class="list-group-item list-group-item-action">Web通知</a>
                                 <a href="" data-toggle="tab" class="list-group-item list-group-item-action">小组件</a>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                                 <div class="card-body">
                                     <div class="tab-pane fade" id="personal">
                                         <div class="table table-striped py-1">
-<!--                                            <img th:src="${settingUsers.profilePicture}" alt="image" id="headimg" class="img-rounded"/>-->
-                                            <div id="headimg" class="img-rounded" ></div>
+                                            <!--                                            <img th:src="${settingUsers.profilePicture}" alt="image" id="headimg" class="img-rounded"/>-->
+                                            <div id="headimg" class="img-rounded"></div>
                                             <div style="margin-left: 15%;margin-top: -8%;">
                                                 <button type="button" onclick="showWindow()"
                                                         class="btn btn-inverse-primary btn-rounded btn-icon">
@@ -99,19 +99,51 @@
                     </div>
                 </div>
                 <!--修改个人资料-->
-<!--                <div class="personal-info">-->
-<!--                    <div class="personal-shade displaynone"></div>-->
-<!--                    <div class="personal-a displaynone">-->
-<!--                        <div id="personalArea"></div>-->
-<!--                        <div class="loading displaynone">正在载入图片...</div>-->
-<!--                        <div class="clipbg-outer">-->
-<!--                            111111111-->
-<!--                        </div>-->
+                <div class="personal-info">
+                    <div class="personal-shade displaynone"></div>
+                    <div class="personal-a displaynone">
+                        <div id="personalArea"></div>
+                        <div class="clipbg-outer">
+                            <div class="card" style="margin-top: -450px">
+                                <div class="card-body">
+                                    <h4 class="card-title">修改个人信息</h4>
+                                    <form class="forms-sample"  id="formid" data-parsley-validate="true" onsubmit="return false">
+                                        <input type="hidden" name="id" th:value="${settingUsers.id}">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">用户名</label>
+                                            <input type="text" name="userName" class="form-control"
+                                                   id="exampleInputUsername1" placeholder="用户名">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">邮箱地址</label>
+                                            <input type="email" name="email" class="form-control"
+                                                   id="exampleInputEmail1" placeholder="邮箱地址">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">手机号码</label>
+                                            <input type="number" name="iphone" class="form-control"
+                                                   id="exampleInputPhone" placeholder="手机号码">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">密码</label>
+                                            <input type="password" name="" class="form-control"
+                                                   id="exampleInputPassword1" placeholder="密码">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputConfirmPassword1">确认密码</label>
+                                            <input type="password" name="password" class="form-control"
+                                                   id="exampleInputConfirmPassword1" placeholder="确认密码">
+                                        </div>
+                                        <button onclick="submitbut()" class="btn btn-primary mr-2">保存</button>
+                                        <div class="btn btn-light" onclick="personalbut()">取消</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-
-<!--                        <div class="close-back">取消</div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                </div>
+            </div>
             </div>
         </section>
         <script th:src="@{http://testwww.9mitao.com/layui_live/lay/lib/jquery.min.js}"></script>
@@ -120,9 +152,12 @@
         <script th:src="@{/js/iscroll-zoom-min.js}"></script>
         <script th:src="@{/js/PhotoClip.js}"></script>
         <script th:inline="javascript">
-            function sonalfun(){
-                var url=[[${settingUsers.profilePicture}]];
-                $('#headimg').css('background-image', 'url( ' + url + ')');
+            function sonalfun() {
+                var url = [[${settingUsers.profilePicture}]];
+                if (url != null) {
+                    $('#headimg').css('background-image', 'url( ' + url + ')');
+                }
+
             }
 
             function personalShow() {
@@ -159,23 +194,28 @@
                 $('.clipbg-shade').fadeOut();
             });
 
+            function personalbut() {
+                $(".personal-a").fadeOut();
+                $('.personal-shade').fadeOut();
+            };
+
             function uploadImage(dataURL) {
-                var dataURL2=dataURL.replace(/\+/g,'%2B');
+                var dataURL2 = dataURL.replace(/\+/g, '%2B');
                 $.ajax({
                     url: '/uploadImage',
-                    data: 'dataURL='+dataURL2,
-                    async:  false,
-                    type : 'POST',
-                    dataType : "json",
+                    data: 'dataURL=' + dataURL2,
+                    async: false,
+                    type: 'POST',
+                    dataType: "json",
                     success: function (response) {
-                        if(response.rspCode == '000000'){
-                           toastr.success("上传成功！")
-                        }else{
+                        if (response.rspCode == '000000') {
+                            toastr.success("上传成功！")
+                        } else {
                             toastr.error(response.rspMsg, '失败');
                         }
 
                     },
-                    error: function(XmlHttpRequest, textStatus, errorThrown){
+                    error: function (XmlHttpRequest, textStatus, errorThrown) {
                         console.log(XMLHttpRequest);
                         console.log(textStatus);
                         console.log(errorThrown);
@@ -183,6 +223,26 @@
 
                 });
             }
+
+            function submitbut() {
+                $.ajax({
+                    type: "POST",
+                    url: "/fromus",
+                    data: $('#formid').serialize(),// 你的formid
+                    async: false,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.rspCode == '000000') {
+                            personalbut();
+                            toastr.success("保存成功！请重新登录")
+                        } else {
+                            toastr.error(response.rspMsg, '失败');
+                        }
+
+                    }
+                })
+            }
+
         </script>
     </body>
 </html>

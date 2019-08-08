@@ -49,24 +49,24 @@ section {
     margin-left: -5px;
 }
 
-.btn {
-    position: relative;
-    z-index: 10;
-    padding: 0.5rem;
-    height: 1.6rem;
-    line-height: 1.6rem;
-    margin: auto;
-    font-size: 0.8rem;
-    color: #fd1142 !important;
-    border: 1px solid #fd1142;
-    border-radius: 0.2rem;
-}
+/*.btn {*/
+/*    position: relative;*/
+/*    z-index: 10;*/
+/*    padding: 0.5rem;*/
+/*    height: 1.6rem;*/
+/*    line-height: 1.6rem;*/
+/*    margin: auto;*/
+/*    font-size: 0.8rem;*/
+/*    color: #fd1142 !important;*/
+/*    border: 1px solid #fd1142;*/
+/*    border-radius: 0.2rem;*/
+/*}*/
 
-.btn img {
-    display: inline-block;
-    width: 0.75rem;
-    margin-left: 0.1rem;
-}
+/*.btn img {*/
+/*    display: inline-block;*/
+/*    width: 0.75rem;*/
+/*    margin-left: 0.1rem;*/
+/*}*/
 
 /*截图上传页面*/
 .loading {
@@ -207,15 +207,28 @@ section {
 
 .personal-a {
     position: fixed;
-    background: rgba(0, 0, 0, .5);
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    z-index: 996;
+    background: #fff;
+    width: 560px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    margin-left: -280px;
+    margin-top: -225px;
+    z-index: 999;
 }
-
 .personal-a #personalArea {
     height: 80%;
     margin: 10px;
+}
+
+.personal-a .personal-close-back {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 22px;
+    width: 22px;
+    background: #f0f0f0 url(../images/close.png) no-repeat center;
+    cursor: pointer;
+    border-radius: 50%;
+    text-indent: -9999px;
 }

@@ -16,6 +16,7 @@ public enum ExceptionMsg {
     LoginNameNotExists("000107","该用户未注册"),
     UserNameSame("000108","新用户名与原用户名一致"),
     FAILUREUSERS("000109","用户名或者密码不能为空！"),
+	REQUIREDALL("00110","必填不能为空"),
 
     FavoritesNameIsNull("000200","收藏夹名称不能为空"),
     FavoritesNameUsed("000201","收藏夹名称已被创建"),

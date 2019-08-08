@@ -7,6 +7,7 @@ import com.example.admindemo.model.result.ExceptionMsg;
 import com.example.admindemo.model.result.ResponseData;
 import com.example.admindemo.repository.UsersRepository;
 import com.example.admindemo.utils.FileUtil;
+import com.example.admindemo.utils.MD5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,5 +139,31 @@ public class IndexController extends BaseController {
       logger.error("upload head portrait failed, ", e);
       return new ResponseData(ExceptionMsg.FAILED);
     }
+  }
+
+  @ResponseBody
+  @RequestMapping(value = "/fromus",method = RequestMethod.POST)
+  public ResponseData formuser(Users users){
+	  JSONObject jsonObject = new JSONObject();
+	  logger.info(jsonObject.toJSONString(users));
+	  if (users.getId()==null||"".equals(users.getId())||users.getUserName()==null||"".equals(users.getUserName())||users.getPassword()==null||
+	    "".equals(users.getPassword())||users.getEmail()==null ||"".equals(users.getEmail())||users.getIphone()==null||"".equals(users.getIphone())){
+		  return new ResponseData(ExceptionMsg.REQUIREDALL);
+	  }
+	  try{
+		  Users user = new Users();
+		  user.setId(users.getId());
+		  user.setUserName(users.getUserName());
+		  user.setEmail(users.getEmail());
+		  user.setIphone(users.getIphone());
+		  user.setPassword(MD5Util.encrypt(users.getPassword()));
+		  usersRepository.save(user);
+		  Users settingUsers = usersRepository.findUsersById(users.getId());
+		  return new ResponseData(ExceptionMsg.SUCCESS,settingUsers);
+	  }catch (Exception e){
+		  logger.error("",e);
+		  return new ResponseData(ExceptionMsg.FAILED);
+	  }
+
   }
 }
