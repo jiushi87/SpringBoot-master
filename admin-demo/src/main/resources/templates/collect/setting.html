@@ -209,7 +209,7 @@
                     dataType: "json",
                     success: function (response) {
                         if (response.rspCode == '000000') {
-                            toastr.success("上传成功！")
+                            toastr.success("上传成功！");
                         } else {
                             toastr.error(response.rspMsg, '失败');
                         }
